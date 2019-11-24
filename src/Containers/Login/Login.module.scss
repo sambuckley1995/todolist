@@ -1,0 +1,27 @@
+.google {
+  .google {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: solid 4px #4885ed;
+    background-color: #4885ed;
+    width: max-content;
+    margin: 10px auto 0 auto;
+  }
+
+  img {
+    height: 40px;
+    margin-right: 10px;
+  }
+  button {
+    background-color: transparent;
+    border: none;
+    color: black;
+    font-size: 1rem;
+    padding-right: 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

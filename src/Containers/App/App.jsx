@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import styles from "./App.module.scss";
 import Routes from "../../Routes";
 import firebase, { provider } from "../../firebase";
-import { navigate } from "@reach/router";
+import { globalHistory } from "@reach/router";
+import googleIcon from "../../Static/Images/Google.png";
 
 class App extends Component {
   state = {
@@ -14,19 +15,13 @@ class App extends Component {
       .auth()
       .signInWithPopup(provider)
       .then(result => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        //var token = result.credential.accessToken;
-        // The signed-in user info.
-        console.log("triggered");
         const user = result.user;
         this.setState({
           user
         });
-        navigate(`/tasks`);
-        console.log(this.state.user);
+        globalHistory.navigate(`/tasks`);
       })
       .catch(error => {
-        // An error happened.
         console.log(error);
       });
   };
@@ -36,35 +31,49 @@ class App extends Component {
       .auth()
       .signOut()
       .then(() => {
-        // Sign-out successful.
         this.setState({
           user: null
         });
+        globalHistory.navigate(`/login`);
       })
       .catch(function(error) {
-        // An error happened.
         console.log(error);
       });
+  };
+
+  isSignedIn = () => {
+    this.state.user === null
+      ? globalHistory.navigate("/login")
+      : console.log(this.props.children);
   };
 
   render() {
     const welcome =
       this.state.user !== null ? (
         <h1 className={styles.header}>
-          Welcome {this.state.user.displayName}, hope you are well today?
+          Welcome {this.state.user.displayName}, your tasks can be seen below
         </h1>
       ) : (
         <h1 className={styles.header}>Welcome, please sign in below</h1>
       );
+    const signOutBtn =
+      this.state.user !== null ? (
+        <div className={styles.google} onClick={this.signOut}>
+          <img src={googleIcon} alt="Google" />
+          <button>signOut</button>
+        </div>
+      ) : null;
     return (
       <>
         <header>{welcome}</header>
         <main>
-          <Routes user={this.state.user} signIn={this.signIn} />
+          <Routes
+            user={this.state.user}
+            signIn={this.signIn}
+            isSignedIn={this.isSignedIn}
+          />
         </main>
-        <footer>
-          <button onClick={this.signOut}>Sign Out</button>
-        </footer>
+        <footer>{signOutBtn}</footer>
       </>
     );
   }

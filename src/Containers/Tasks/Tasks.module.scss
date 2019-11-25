@@ -1,0 +1,31 @@
+h1 {
+  font-size: 30px;
+  padding: 10px;
+}
+
+.taskList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.littleBlanket {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  height: 100%;
+  width: 100%;
+}
+
+.input {
+  textarea {
+    border-radius: 10px;
+    font-family: sans-serif, cursive;
+    width: 100%;
+    padding: 5px;
+    border: none;
+    resize: none;
+  }
+  display: flex;
+}

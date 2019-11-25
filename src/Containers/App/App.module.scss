@@ -1,3 +1,42 @@
+$primaryColor: #4885ed;
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .header {
-  background-color: hotpink;
+  background-color: $primaryColor;
+}
+
+.google {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: solid 4px $primaryColor;
+  width: max-content;
+  margin: 10px auto 0 auto;
+
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 10px 3px #a9c3ec;
+  }
+
+  img {
+    height: 40px;
+    margin-right: 10px;
+  }
+
+  button {
+    background-color: transparent;
+    border: none;
+    color: $primaryColor;
+    font-size: 1rem;
+    padding-right: 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
